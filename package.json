@@ -1,0 +1,15 @@
+{
+  "name": "cruton",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^25.3.3"
+  }
+}
