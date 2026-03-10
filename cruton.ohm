@@ -1,0 +1,26 @@
+CRUTON {
+    Program = Section+
+    Statement = Out
+
+    Section = RES | DAT | MAIN | SECT
+
+    Out = "out" Expr
+
+    Expr = string
+
+    string = "\"" (~"\"" any)* "\""
+
+    End = "end"
+
+    RES = ".res" ":" (~End Statement)* End
+
+    DAT = ".dat" ":" (~End Statement)* End
+
+    MAIN = ".entry" ":" (~End Statement)* End
+
+    SECT = ident ":" (~End Statement)* End
+
+    ident = letter idchar*
+
+    idchar = letter | "_" | digit
+}
