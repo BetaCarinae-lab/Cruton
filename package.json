@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/node": "^25.3.3"
+    "@types/node": "^25.3.3",
+    "ohm-js": "^17.5.0"
   }
 }
