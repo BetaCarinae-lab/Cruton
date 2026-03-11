@@ -18,6 +18,13 @@ let semanticDictionary: ohm.ActionDict<any> = {
         return ast
     },
 
+    DAT(_dot, _, body, _end) {
+        let bodyast = []
+        for(let i in body.children) {
+            
+        }
+    },
+
     MAIN(_dot, _, body, _end) {
         let bodyast = []
         for(let i in body.children) {
@@ -39,6 +46,10 @@ let semanticDictionary: ohm.ActionDict<any> = {
     string(_oq, text, _cq) {
         return text.sourceString
     },
+
+    number(digits) {
+        return new Number(digits.sourceString).valueOf()
+    }
 }
 
 const semantics = grammar.createSemantics().addOperation('ast', semanticDictionary)
@@ -52,11 +63,25 @@ if(mr.failed()) {
     ast = semantics(mr).ast()
 }
 
+const numberformat = ir.builder.CreateGlobalStringPtr("%d\n")
+
 const utils = {
-    printHelper(text: string) {
-        const str = ir.createStringPTR(text)
-        ir.call(ir.printf, [str])
-    }
+    printHelper(text: any) {
+        const val = [this.getPrimitive(text)]
+        if(typeof text !== 'string') {
+            val.unshift(numberformat)
+        }
+        console.log(val)
+        ir.call(ir.printf, val)
+    },
+    getPrimitive(val: any) {
+        switch(typeof val) {
+            case 'string':
+                return ir.createStringPTR(val)
+            case 'number':
+                return ir.builder.getInt32(val)
+        }
+    },
 }
 
 if(ast) {
@@ -79,7 +104,7 @@ function parseAST(ast: any[]) {
 function parse(astfrag: any) {
     switch(astfrag.type) {
         case 'print':
-            utils.printHelper(astfrag.value + '\n')
+            utils.printHelper(typeof astfrag.value == "string" ? astfrag.value + '\n' : astfrag.value)
             
     }
 }

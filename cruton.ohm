@@ -4,9 +4,12 @@ CRUTON {
 
     Section = RES | DAT | MAIN
 
+    number = digit+
+
     Out = "out" Expr
 
     Expr = string
+         | number
 
     string = "\"" (~"\"" any)* "\""
 
@@ -14,11 +17,19 @@ CRUTON {
 
     RES = ".res" ":" (~End Statement)* End
 
-    DAT = ".dat" ":" (~End Statement)* End
+    DAT = ".dat" ":" (~End VarDecl)* End
 
     MAIN = ".entry" ":" (~End Statement)* End
 
     ident = letter idchar*
+
+    VarDecl = DefaultVarDecl
+
+    DefaultVarDecl = ident ":" Expr
+
+    ident = letter idchar*
+
+    idchar = "_" | letter | digit
 
     idchar = letter | "_" | digit
 }

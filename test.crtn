@@ -1,3 +1,4 @@
 .entry:
     out "Hello, World!"
+    out 10
 end
