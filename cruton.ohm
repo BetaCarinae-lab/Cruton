@@ -2,7 +2,7 @@ CRUTON {
     Program = Section+
     Statement = Out
 
-    Section = RES | DAT | MAIN | SECT
+    Section = RES | DAT | MAIN
 
     Out = "out" Expr
 
@@ -17,8 +17,6 @@ CRUTON {
     DAT = ".dat" ":" (~End Statement)* End
 
     MAIN = ".entry" ":" (~End Statement)* End
-
-    SECT = ident ":" (~End Statement)* End
 
     ident = letter idchar*
 

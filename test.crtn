@@ -1,1 +1,3 @@
-out "Hello, world!"
+.entry:
+    out "Hello, World!"
+end
