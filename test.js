@@ -19,7 +19,13 @@ console.log(a);
 r1 = 2;   
 r2 = 2;   
 add()   
-console.log(r1);
+console.log(r1);   
+console.log(!(true || false));   
+
+if(true) {
+    console.log("Is true!");
+}
+        
 }
         
 function add() {

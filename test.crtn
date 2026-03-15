@@ -15,6 +15,12 @@
     call add
 
     out r1
+
+    out not (true or false)
+
+    if true:
+        out "Is true!"
+    stop
 end
 
 .add:

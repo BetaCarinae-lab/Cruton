@@ -46,6 +46,22 @@ function ${id.eval()}() {
         return `${left.eval()} && ${right.eval()}`
     },
 
+    Primary_parens(_op, expr, _cp) {
+        return `(${expr.eval()})`
+    },  
+
+    Primary_not(_, expr) {
+        return `!${expr.eval()}`
+    },
+
+    If(_if, condition, _, body, _stop) {
+        return `
+if(${condition.eval()}) {
+    ${body.children.map(c => c.eval()).join('\n')}
+}
+        `
+    },
+
     true(_) {
         return `true`
     },

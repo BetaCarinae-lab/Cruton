@@ -32,6 +32,34 @@ function ${id.eval()}() {
 }
         `;
     },
+    Expr(or) {
+        return or.eval();
+    },
+    LogicalOr_or(left, _or, right) {
+        return `${left.eval()} || ${right.eval()}`;
+    },
+    LogicalAnd_and(left, _and, right) {
+        return `${left.eval()} && ${right.eval()}`;
+    },
+    Primary_parens(_op, expr, _cp) {
+        return `(${expr.eval()})`;
+    },
+    Primary_not(_, expr) {
+        return `!${expr.eval()}`;
+    },
+    If(_if, condition, _, body, _stop) {
+        return `
+if(${condition.eval()}) {
+    ${body.children.map(c => c.eval()).join('\n')}
+}
+        `;
+    },
+    true(_) {
+        return `true`;
+    },
+    false(_) {
+        return `false`;
+    },
     Call(_call, id) {
         return `${id.eval()}()`;
     },
