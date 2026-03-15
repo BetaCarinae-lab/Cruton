@@ -15,6 +15,10 @@ CRUTON {
 
     Custom = "." ident ":" (~End Statement)* End
 
+    true = "true"
+
+    false = "false"
+
     Call = "call" ident
 
     Comment = "//" (~"\n" any)* "\n"
@@ -33,6 +37,8 @@ CRUTON {
 
     expr = string
          | number
+         | true
+         | false
          | ident
 
     string = "\"" (~"\"" any)* "\""

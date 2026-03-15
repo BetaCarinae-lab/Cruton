@@ -34,6 +34,14 @@ function ${id.eval()}() {
         `
     },  
 
+    true(_) {
+        return `true`
+    },
+
+    false(_) {
+        return `false`
+    },
+
     Call(_call, id) {
         return `${id.eval()}()`
     },
