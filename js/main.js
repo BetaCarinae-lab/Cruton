@@ -29,7 +29,18 @@ const node_fs_1 = require("node:fs");
 const node_process_1 = require("node:process");
 const semantics_1 = require("./semantics");
 const node_child_process_1 = require("node:child_process");
+const path = __importStar(require("path"));
+const node_process_2 = require("node:process");
 exports.grammar = ohm.grammar((0, node_fs_1.readFileSync)('cruton.ohm', 'utf-8'));
+if (node_process_1.argv[2] == 'new') {
+    const structure = {
+        name: node_process_1.argv[3],
+        main: null,
+        outputFolder: null,
+    };
+    (0, node_fs_1.writeFileSync)('config.json', JSON.stringify(structure, null, 2), 'utf-8');
+    (0, node_process_2.exit)(0);
+}
 const input = (0, node_fs_1.readFileSync)(node_process_1.argv[2], 'utf-8');
 const matchresult = exports.grammar.match(input);
 const semantics = exports.grammar.createSemantics().addOperation('eval', semantics_1.dict);
@@ -39,6 +50,7 @@ if (matchresult.failed()) {
 else {
     const output = semantics(matchresult).eval();
     if (node_process_1.argv[3] == '-o') {
+        const outputname = node_process_1.argv[4] == 'default' ? path.parse(node_process_1.argv[2]).name + '.js' : node_process_1.argv[4];
         (0, node_fs_1.writeFileSync)(node_process_1.argv[4], output, 'utf-8');
         if (node_process_1.argv[5] != '-s') {
             (0, node_child_process_1.exec)('node ' + node_process_1.argv[4], (error, stdout, stderr) => {
