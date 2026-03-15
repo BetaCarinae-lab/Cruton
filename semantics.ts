@@ -38,14 +38,6 @@ function ${id.eval()}() {
         return or.eval() 
     },
 
-    Import(_import, ding) {
-        return `require(${ding.eval()})`
-    },
-
-    Export(_export, id) {
-        return `module.exports.${id.eval()} = ${id.eval()}`
-    },
-
     LogicalOr_or(left, _or, right) {
         return `${left.eval()} || ${right.eval()}`
     },
@@ -82,8 +74,12 @@ if(${condition.eval()}) {
         return `${id.eval()}()`
     },
 
-    Ini(_ini, id) {
-        return `let ${id.eval()};`
+    Ini(_ini, id, _, expr) {
+        if(expr.sourceString) {
+            return `let ${id.eval()} = ${expr.eval()};`
+        } else {
+            return `let ${id.eval()};`
+        }
     },
     
     Mov(_mov, id, _, expr) {

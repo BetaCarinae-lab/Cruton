@@ -10,10 +10,8 @@
     var r9 = null;
     var r10 = null;
 function main() {
-    let a;   
-a = 10;   
-let b;   
-b = 10;   
+    let a = 10;   
+let b = 10;   
 a = a + b   
 console.log(a);   
 r1 = 2;   

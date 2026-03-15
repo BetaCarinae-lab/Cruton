@@ -63,8 +63,13 @@ if(${condition.eval()}) {
     Call(_call, id) {
         return `${id.eval()}()`;
     },
-    Ini(_ini, id) {
-        return `let ${id.eval()};`;
+    Ini(_ini, id, _, expr) {
+        if (expr.sourceString) {
+            return `let ${id.eval()} = ${expr.eval()};`;
+        }
+        else {
+            return `let ${id.eval()};`;
+        }
     },
     Mov(_mov, id, _, expr) {
         return `${id.eval()} = ${expr.eval()};`;

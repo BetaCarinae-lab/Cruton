@@ -1,12 +1,8 @@
 .entry:
-    ini a
-    mov a, 10
-
-    ini b
-    mov b, 10
+    ini a, 10
+    ini b, 10
 
     add a, b
-
     out a
 
     mov r1, 2
