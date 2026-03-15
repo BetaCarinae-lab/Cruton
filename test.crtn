@@ -18,13 +18,9 @@
         out "Is true!"
     stop
 
-    static c, 10
+    static c, "Hi, im static, no reassigment >:("
 
     out c
-
-    mov c, 10
-
-    ; errors here
 end
 
 .add:

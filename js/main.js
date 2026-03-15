@@ -40,19 +40,24 @@ else {
     const output = semantics(matchresult).eval();
     if (node_process_1.argv[3] == '-o') {
         (0, node_fs_1.writeFileSync)(node_process_1.argv[4], output, 'utf-8');
-        (0, node_child_process_1.exec)('node ./' + node_process_1.argv[4], (error, stdout, stderr) => {
-            if (error) {
-                console.error('Error when running');
-                console.error(error.message);
-            }
-            if (stdout) {
-                console.log('OUT:');
-                console.log(stdout);
-            }
-            if (stderr) {
-                // do nothing ig
-            }
-        });
+        if (node_process_1.argv[5] != '-s') {
+            (0, node_child_process_1.exec)('node ' + node_process_1.argv[4], (error, stdout, stderr) => {
+                if (error) {
+                    console.error('Error when running');
+                    console.error(error.message);
+                }
+                if (stdout) {
+                    console.log('OUT:');
+                    console.log(stdout);
+                }
+                if (stderr) {
+                    // do nothing ig
+                }
+            });
+        }
+        else {
+            console.log(`Produced output at ${node_process_1.argv[4]}`);
+        }
     }
     else {
         console.log('No output specified!, use -o [name].js to create a output file!');

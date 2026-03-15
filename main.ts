@@ -17,21 +17,25 @@ if(matchresult.failed()) {
     const output = semantics(matchresult).eval()
     if(argv[3] == '-o') {
         writeFileSync(argv[4], output, 'utf-8')
-        exec('node ' + argv[4], (error, stdout, stderr) => {
-            if(error) {
-                console.error('Error when running')
-                console.error(error.message)
-            }
+        if(argv[5] != '-s') {
+            exec('node ' + argv[4], (error, stdout, stderr) => {
+                if(error) {
+                    console.error('Error when running')
+                    console.error(error.message)
+                }
 
-            if(stdout) {
-                console.log('OUT:')
-                console.log(stdout)
-            }
+                if(stdout) {
+                    console.log('OUT:')
+                    console.log(stdout)
+                }
 
-            if(stderr) {
-                // do nothing ig
-            }
-        })
+                if(stderr) {
+                    // do nothing ig
+                }
+            })
+        } else {
+            console.log(`Produced output at ${argv[4]}`)
+        }
     } else {
         console.log('No output specified!, use -o [name].js to create a output file!')
         console.log('Here is the output:')

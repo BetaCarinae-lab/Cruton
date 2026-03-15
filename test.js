@@ -24,9 +24,8 @@ if(true) {
     console.log("Is true!");
 }
            
-const c = 10   
-console.log(c);   
-c = 10;
+const c = "Hi, im static, no reassigment >:("   
+console.log(c);
 }
         
 function add() {
