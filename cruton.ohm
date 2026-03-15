@@ -1,6 +1,7 @@
 CRUTON {
     Program = Section+
     Statement = Out
+              | Export
               | Comment
               | Call
               | Ini 
@@ -17,6 +18,10 @@ CRUTON {
     Custom = "." ident ":" (~End Statement)* End
 
     true = "true"
+
+    Import = "import" ident
+
+    Export = "export" ident
 
     false = "false"
 
@@ -49,6 +54,7 @@ CRUTON {
     Primary = "(" Expr ")" --parens
          | "not" Expr --not
          | string
+         | Import
          | number
          | true
          | false
@@ -62,7 +68,7 @@ CRUTON {
 
     MAIN = ".entry" ":" (~End Statement)* End
 
-    Ini = "ini" ident
+    Ini = "ini" ident ","? Expr
 
     Mov = "mov" ident "," Expr
 

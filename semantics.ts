@@ -38,6 +38,14 @@ function ${id.eval()}() {
         return or.eval() 
     },
 
+    Import(_import, ding) {
+        return `require(${ding.eval()})`
+    },
+
+    Export(_export, id) {
+        return `module.exports.${id.eval()} = ${id.eval()}`
+    },
+
     LogicalOr_or(left, _or, right) {
         return `${left.eval()} || ${right.eval()}`
     },
