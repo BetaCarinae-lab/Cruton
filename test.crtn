@@ -1,4 +1,7 @@
 .entry:
+    ini a
+    mov a, 10
     out "Hello, World!"
     out 10
+    out a
 end

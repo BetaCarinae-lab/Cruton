@@ -1,35 +1,30 @@
 CRUTON {
     Program = Section+
     Statement = Out
+              | Ini 
+              | Mov
 
-    Section = RES | DAT | MAIN
+    Section = MAIN
 
     number = digit+
 
-    Out = "out" Expr
+    Out = "out" expr
 
-    Expr = string
+    expr = string
          | number
+         | ident
 
     string = "\"" (~"\"" any)* "\""
 
     End = "end"
 
-    RES = ".res" ":" (~End Statement)* End
-
-    DAT = ".dat" ":" (~End VarDecl)* End
-
     MAIN = ".entry" ":" (~End Statement)* End
 
-    ident = letter idchar*
+    Ini = "ini" ident
 
-    VarDecl = DefaultVarDecl
-
-    DefaultVarDecl = ident ":" Expr
+    Mov = "mov" ident "," expr
 
     ident = letter idchar*
-
-    idchar = "_" | letter | digit
 
     idchar = letter | "_" | digit
 }

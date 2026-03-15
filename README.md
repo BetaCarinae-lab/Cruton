@@ -8,7 +8,7 @@ AST
 Parse  
  ||  
  \/  
-LLVM IR  
+ TS
  ||  
  \/  
  Enjoy :3  
