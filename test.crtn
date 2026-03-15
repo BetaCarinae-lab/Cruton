@@ -1,7 +1,22 @@
 .entry:
     ini a
     mov a, 10
-    out "Hello, World!"
-    out 10
+
+    ini b
+    mov b, 10
+
+    add a, b
+
     out a
+
+    mov r1, 2
+    mov r2, 2
+
+    call add
+
+    out r1
+end
+
+.add:
+    add r1, r2
 end

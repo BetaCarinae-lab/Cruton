@@ -1,10 +1,31 @@
 CRUTON {
     Program = Section+
     Statement = Out
+              | Comment
+              | Call
               | Ini 
               | Mov
+              | Add
+              | Sub
+              | Mul
+              | Div
 
     Section = MAIN
+            | Custom
+
+    Custom = "." ident ":" (~End Statement)* End
+
+    Call = "call" ident
+
+    Comment = "//" (~"\n" any)* "\n"
+
+    Add = "add" ident "," expr
+
+    Sub = "sub" ident "," expr
+
+    Mul = "mul" ident "," expr
+
+    Div = "div" ident "," expr
 
     number = digit+
 
