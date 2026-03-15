@@ -1,9 +1,9 @@
 CRUTON {
     Program = Section+
     Statement = Out
-              | Comment
               | Call
               | Ini 
+              | Static
               | Mov
               | If
               | Add
@@ -22,7 +22,9 @@ CRUTON {
 
     Call = "call" ident
 
-    Comment = "//" (~"\n" any)* "\n"
+    comment = ";" (~"\n" any)*
+
+    space += comment
 
     If = "if" Expr ":" (~Stop Statement)* Stop
 
@@ -63,6 +65,8 @@ CRUTON {
     MAIN = ".entry" ":" (~End Statement)* End
 
     Ini = "ini" ident "," Expr
+
+    Static = "static" ident "," Expr
 
     Mov = "mov" ident "," Expr
 

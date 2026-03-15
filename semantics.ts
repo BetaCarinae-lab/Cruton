@@ -81,6 +81,10 @@ if(${condition.eval()}) {
             return `let ${id.eval()};`
         }
     },
+
+    Static(_static, id, _, expr) {
+        return `const ${id.eval()} = ${expr.eval()}`
+    },
     
     Mov(_mov, id, _, expr) {
         return `${id.eval()} = ${expr.eval()};`

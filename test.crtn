@@ -17,6 +17,14 @@
     if true:
         out "Is true!"
     stop
+
+    static c, 10
+
+    out c
+
+    mov c, 10
+
+    ; errors here
 end
 
 .add:

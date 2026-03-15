@@ -28,6 +28,7 @@ const ohm = __importStar(require("ohm-js"));
 const node_fs_1 = require("node:fs");
 const node_process_1 = require("node:process");
 const semantics_1 = require("./semantics");
+const node_child_process_1 = require("node:child_process");
 exports.grammar = ohm.grammar((0, node_fs_1.readFileSync)('cruton.ohm', 'utf-8'));
 const input = (0, node_fs_1.readFileSync)(node_process_1.argv[2], 'utf-8');
 const matchresult = exports.grammar.match(input);
@@ -37,5 +38,25 @@ if (matchresult.failed()) {
 }
 else {
     const output = semantics(matchresult).eval();
-    (0, node_fs_1.writeFileSync)(node_process_1.argv[3], output, 'utf-8');
+    if (node_process_1.argv[3] == '-o') {
+        (0, node_fs_1.writeFileSync)(node_process_1.argv[4], output, 'utf-8');
+        (0, node_child_process_1.exec)('node ./' + node_process_1.argv[4], (error, stdout, stderr) => {
+            if (error) {
+                console.error('Error when running');
+                console.error(error.message);
+            }
+            if (stdout) {
+                console.log('OUT:');
+                console.log(stdout);
+            }
+            if (stderr) {
+                // do nothing ig
+            }
+        });
+    }
+    else {
+        console.log('No output specified!, use -o [name].js to create a output file!');
+        console.log('Here is the output:');
+        console.log(output);
+    }
 }

@@ -23,7 +23,10 @@ console.log(!(true || false));
 if(true) {
     console.log("Is true!");
 }
-        
+           
+const c = 10   
+console.log(c);   
+c = 10;
 }
         
 function add() {
