@@ -34,6 +34,18 @@ function ${id.eval()}() {
         `
     },  
 
+    Expr(or) {
+        return or.eval() 
+    },
+
+    LogicalOr_or(left, _or, right) {
+        return `${left.eval()} || ${right.eval()}`
+    },
+
+    LogicalAnd_and(left, _and, right) {
+        return `${left.eval()} && ${right.eval()}`
+    },
+
     true(_) {
         return `true`
     },

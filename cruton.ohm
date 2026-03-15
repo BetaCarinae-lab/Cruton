@@ -5,6 +5,7 @@ CRUTON {
               | Call
               | Ini 
               | Mov
+              | If
               | Add
               | Sub
               | Mul
@@ -23,19 +24,31 @@ CRUTON {
 
     Comment = "//" (~"\n" any)* "\n"
 
-    Add = "add" ident "," expr
+    If = "if" Expr ":" (~Stop Statement)* Stop
 
-    Sub = "sub" ident "," expr
+    Add = "add" ident "," Expr
 
-    Mul = "mul" ident "," expr
+    Sub = "sub" ident "," Expr
 
-    Div = "div" ident "," expr
+    Mul = "mul" ident "," Expr
+
+    Div = "div" ident "," Expr
 
     number = digit+
 
-    Out = "out" expr
+    Out = "out" Expr
 
-    expr = string
+    Expr = LogicalOr
+
+    LogicalOr = LogicalOr "or" LogicalOr --or
+              | LogicalAnd
+    
+    LogicalAnd = LogicalAnd "and" LogicalAnd --and
+               | Primary
+
+    Primary = "(" Expr ")" --parens
+         | "not" Expr --not
+         | string
          | number
          | true
          | false
@@ -45,11 +58,13 @@ CRUTON {
 
     End = "end"
 
+    Stop = "stop"
+
     MAIN = ".entry" ":" (~End Statement)* End
 
     Ini = "ini" ident
 
-    Mov = "mov" ident "," expr
+    Mov = "mov" ident "," Expr
 
     ident = letter idchar*
 
