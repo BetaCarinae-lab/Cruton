@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dict = void 0;
-const globals = [];
 exports.dict = {
     Program(sections) {
         let code = '';
@@ -27,12 +26,21 @@ function main() {
 }
         `;
     },
+    Array(_ob, elements, _cb) {
+        return `[${elements.children.map(c => c.eval())}]`;
+    },
+    nonemptyListOf(_, b, _c) {
+        return _.sourceString + b.sourceString;
+    },
     Custom(_, id, _c, body, _end) {
         return `
 function ${id.eval()}() {
     ${body.children.map(c => c.eval()).join('\t\n')}
 }
         `;
+    },
+    ArrayAccess(id, _ob, expr, _cb) {
+        return `${id.eval()}[${expr.eval()}]`;
     },
     Import(_import, modulename, _as, id) {
         return `var ${id.eval()} = require(${modulename.eval()})`;

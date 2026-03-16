@@ -1,0 +1,5 @@
+.entry:
+    ini a, [10, 20, 30]
+
+    out a[2]
+end

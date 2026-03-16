@@ -66,13 +66,20 @@ CRUTON {
     Primary = "(" Expr ")" --parens
          | "not" Expr --not
          | string
-         | Comparisons
+         | ArrayAccess
          | number
          | true
+         | Array
          | false
          | ident
 
+    
+
     string = "\"" (~"\"" any)* "\""
+
+    Array = "[" listOf<Expr, ","> "]"
+
+    ArrayAccess = ident "[" Expr "]"
 
     End = "end"
 
