@@ -1,12 +1,14 @@
 import * as ohm from 'ohm-js'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { argv } from 'node:process'
 import { dict } from './semantics'
 import { exec } from 'node:child_process'
 import * as path from 'path'
 import { exit } from 'node:process'
+import { join } from 'node:path'
 
-export const grammar = ohm.grammar(readFileSync('cruton.ohm', 'utf-8'))
+export const grammar = ohm.grammar(readFileSync('./src/cruton.ohm', 'utf-8'))
+const config = existsSync("./config.json") ? JSON.parse(readFileSync("./config.json", 'utf-8')) : {name: null, main: null, outputFolder: null} 
 
 if(argv[2] == 'new') {
     const structure = {
@@ -32,9 +34,9 @@ if(matchresult.failed()) {
     const output = semantics(matchresult).eval()
     if(argv[3] == '-o') {
         const outputname = argv[4] == 'default' ? path.parse(argv[2]).name + '.js' : argv[4]
-        writeFileSync(argv[4], output, 'utf-8')
+        writeFileSync(join(config.outputFolder ? config.outputFolder : "", outputname), output, 'utf-8')
         if(argv[5] != '-s') {
-            exec('node ' + argv[4], (error, stdout, stderr) => {
+            exec('node ' + join(config.outputFolder ? config.outputFolder : "", outputname), (error, stdout, stderr) => {
                 if(error) {
                     console.error('Error when running')
                     console.error(error.message)
@@ -50,7 +52,7 @@ if(matchresult.failed()) {
                 }
             })
         } else {
-            console.log(`Produced output at ${argv[4]}`)
+            console.log(`Produced output at ${join(config.outputFolder ? config.outputFolder : "", outputname)}`)
         }
     } else {
         console.log('No output specified!, use -o [name].js to create a output file!')
