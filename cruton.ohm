@@ -33,8 +33,6 @@ CRUTON {
 
     space += comment
 
-    space // stupid ohm parser, yelling at me for "nOt UsInG sPaCe!!!"
-
     If = "if" Expr ":" (~Stop Statement)* Stop
 
     Add = "add" ident "," Expr
