@@ -1,0 +1,7 @@
+.data:
+    globalVar: 10
+end
+
+.entry:
+    out globalVar
+end

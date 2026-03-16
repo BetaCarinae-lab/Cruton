@@ -11,14 +11,19 @@ CRUTON {
               | Mul
               | Div
 
-    Section = MAIN
+    Section = GLOBALS
+            | MAIN
             | Custom
+
+    GLOBALS = "." "data" ":" (~End GlobalDecl)* End
 
     Custom = "." ident ":" (~End Statement)* End
 
     true = "true"
 
     false = "false"
+
+    GlobalDecl = ident ":" Expr ","?
 
     Call = "call" ident
 
@@ -62,7 +67,7 @@ CRUTON {
 
     Stop = "stop"  
 
-    MAIN = ".entry" ":" (~End Statement)* End
+    MAIN = "." "entry" ":" (~End Statement)* End
 
     Ini = "ini" ident "," Expr
 

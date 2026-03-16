@@ -1,4 +1,8 @@
 
+// DATA SECTION
+var globalVar = 10
+// DATA SECTION END
+        
     var r1 = null;
     var r2 = null;
     var r3 = null;
@@ -10,26 +14,7 @@
     var r9 = null;
     var r10 = null;
 function main() {
-    let a = 10;   
-let b = 10;   
-a = a + b   
-console.log(a);   
-r1 = 2;   
-r2 = 2;   
-add()   
-console.log(r1);   
-console.log(!(true || false));   
-
-if(true) {
-    console.log("Is true!");
-}
-           
-const c = "Hi, im static, no reassigment >:("   
-console.log(c);
-}
-        
-function add() {
-    r1 = r1 + r2
+    console.log(globalVar);
 }
         
  main() 
