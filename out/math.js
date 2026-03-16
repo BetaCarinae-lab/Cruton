@@ -14,20 +14,27 @@ function main() {
 let b = 10;   
 a = a + b   
 console.log(a);   
+//  should be 20   
+//  reset   
 a = 10;   
 b = 10;   
 a = a - b   
 console.log(a);   
+//  should be 0   
 a = 10;   
 b = 10;   
 a = a * b   
 console.log(a);   
+//  should be 100   
 a = 10;   
 b = 10;   
 a = a / b   
 console.log(a);   
+//  should be 1   
 console.log(a + b);   
-console.log(a - b);
+//  should be 11   
+console.log(a - b);   
+//  should be -9
 }
         
  main() 

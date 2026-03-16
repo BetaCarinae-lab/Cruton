@@ -129,6 +129,10 @@ if(${condition.eval()}) {
         return first.sourceString + rest.sourceString
     },
 
+    comment(_, text) {
+        return '// ' + text.sourceString
+    },
+
     Add(_add, id, _, expr) {
         return `${id.eval()} = ${id.eval()} + ${expr.eval()}`
     },

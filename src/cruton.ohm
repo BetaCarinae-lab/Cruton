@@ -1,6 +1,7 @@
 CRUTON {
     Program = Section+
     Statement = Out
+              | comment
               | Call
               | Ini 
               | Static
@@ -30,8 +31,6 @@ CRUTON {
     Call = "call" ident ","? ident?
 
     comment = ";" (~"\n" any)*
-
-    space += comment
 
     If = "if" Expr ":" (~Stop Statement)* Stop
 
