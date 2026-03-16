@@ -1,7 +1,5 @@
 import { ActionDict } from "ohm-js";
 
-const globals: string[] = []
-
 export const dict: ActionDict<any> = {
     Program(sections) {
         let code = ''
