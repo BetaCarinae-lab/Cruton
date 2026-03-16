@@ -1,0 +1,22 @@
+.entry:
+    ini a, true
+    ini b, true
+
+    if a and b:
+        out "Correct!"
+    stop
+
+    mov a, false
+
+    if a and b:
+        out "Not Correct!"
+    stop
+
+    if a or b:
+        out "Correct!"
+    stop
+
+    if not a:
+        out "Correct!"
+    stop
+end

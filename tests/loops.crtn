@@ -1,0 +1,8 @@
+.entry:
+    ini counter, 0          ; init counter
+
+    loop:
+        out "This will repeat 2 times!"
+        add a, 1            ; Increment
+    if not(a = 2)
+end

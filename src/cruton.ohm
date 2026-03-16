@@ -5,6 +5,7 @@ CRUTON {
               | Call
               | Ini 
               | Static
+              | While
               | Mov
               | If
               | Add
@@ -42,6 +43,10 @@ CRUTON {
 
     Div = "div" ident "," Expr
 
+    Comparisons = Expr "=" Expr --equality
+                | Expr ">" Expr --greater
+                | Expr "<" Expr --less
+
     number = digit+
 
     Out = "out" Expr
@@ -61,6 +66,7 @@ CRUTON {
     Primary = "(" Expr ")" --parens
          | "not" Expr --not
          | string
+         | Comparisons
          | number
          | true
          | false
@@ -69,6 +75,8 @@ CRUTON {
     string = "\"" (~"\"" any)* "\""
 
     End = "end"
+
+    While = "loop" ":" (~"if" Statement)* "if" Expr
 
     Stop = "stop"  
 

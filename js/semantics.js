@@ -103,11 +103,27 @@ if(${condition.eval()}) {
     Mov(_mov, id, _, expr) {
         return `${id.eval()} = ${expr.eval()};`;
     },
+    Comparisons_equality(left, _, right) {
+        return `${left.eval()} == ${right.eval()}`;
+    },
+    Comparisons_greater(left, _, right) {
+        return `${left.eval()} > ${right.eval()}`;
+    },
+    Comparisons_less(left, _, right) {
+        return `${left.eval()} < ${right.eval()}`;
+    },
     Out(_out, expr) {
         return `console.log(${expr.eval()});`;
     },
     ident(first, rest) {
         return first.sourceString + rest.sourceString;
+    },
+    While(_loop, _, body, _if, cond) {
+        return `
+        while(${cond.eval()}) {
+            ${body.children.map(c => c.eval()).join('\t\n')}
+        }
+        `;
     },
     comment(_, text) {
         return '// ' + text.sourceString;
