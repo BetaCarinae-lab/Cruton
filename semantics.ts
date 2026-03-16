@@ -97,8 +97,12 @@ if(${condition.eval()}) {
         }
     },
 
-    Additive_plus() {
+    Additive_plus(left, _, right) {
+        return `${left.eval()} + ${right.eval()}`
+    },
 
+    Additive_minus(left, _, right) {
+        return `${left.eval()} - ${right.eval()}`
     },
 
     Ini(_ini, id, _, expr) {
@@ -130,15 +134,15 @@ if(${condition.eval()}) {
     },
 
     Sub(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`
+        return `${id.eval()} = ${id.eval()} - ${expr.eval()}`
     },
 
     Mul(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`
+        return `${id.eval()} = ${id.eval()} * ${expr.eval()}`
     },
 
     Div(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`
+        return `${id.eval()} = ${id.eval()} / ${expr.eval()}`
     },
 
     string(_oq, text, _cq) {

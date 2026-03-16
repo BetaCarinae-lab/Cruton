@@ -1,0 +1,35 @@
+.entry:
+    ini a, 10
+    ini b, 10
+
+    add a, b
+
+    out a ; should be 20
+
+    ; reset
+    mov a, 10
+    mov b, 10
+
+    sub a, b
+
+    out a ; should be 0
+
+    mov a, 10
+    mov b, 10
+
+    mul a, b
+
+    out a ; should be 100
+
+    mov a, 10
+    mov b, 10
+
+    div a, b
+
+    out a ; should be 1
+
+
+    out a + b ; should be 11
+
+    out a - b ; should be -9
+end

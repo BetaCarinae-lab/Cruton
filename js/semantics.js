@@ -83,7 +83,11 @@ if(${condition.eval()}) {
             return `${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`;
         }
     },
-    Additive_plus() {
+    Additive_plus(left, _, right) {
+        return `${left.eval()} + ${right.eval()}`;
+    },
+    Additive_minus(left, _, right) {
+        return `${left.eval()} - ${right.eval()}`;
     },
     Ini(_ini, id, _, expr) {
         if (expr.sourceString) {
@@ -109,13 +113,13 @@ if(${condition.eval()}) {
         return `${id.eval()} = ${id.eval()} + ${expr.eval()}`;
     },
     Sub(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`;
+        return `${id.eval()} = ${id.eval()} - ${expr.eval()}`;
     },
     Mul(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`;
+        return `${id.eval()} = ${id.eval()} * ${expr.eval()}`;
     },
     Div(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`;
+        return `${id.eval()} = ${id.eval()} / ${expr.eval()}`;
     },
     string(_oq, text, _cq) {
         return "\"" + text.sourceString + "\"";
