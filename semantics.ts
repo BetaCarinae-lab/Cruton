@@ -36,6 +36,10 @@ function ${id.eval()}() {
 }
         `
     }, 
+
+    Import(_import, modulename,  _as, id) {
+        return `var ${id.eval()} = require(${modulename.eval()})`
+    },
     
     GLOBALS(_d, _data, _, body, _end) {
         return `
@@ -85,8 +89,12 @@ if(${condition.eval()}) {
         return `false`
     },
 
-    Call(_call, id) {
-        return `${id.eval()}()`
+    Call(_call, id, _c, outputTo) {
+        if(outputTo.sourceString) {
+            return `${outputTo.sourceString} = ${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`
+        } else {
+            return `${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`
+        }
     },
 
     Ini(_ini, id, _, expr) {

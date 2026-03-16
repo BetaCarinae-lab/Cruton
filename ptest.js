@@ -1,6 +1,6 @@
 
 // DATA SECTION
-var ps = require("prompt-sync")
+var prompt = require("./std/prompt.js")
 // DATA SECTION END
         
     var r1 = null;
@@ -14,7 +14,9 @@ var ps = require("prompt-sync")
     var r9 = null;
     var r10 = null;
 function main() {
-    console.log(ps);
+    r1 = "Enter Name!";   
+r2 = prompt(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)   
+console.log(r2);
 }
         
  main() 

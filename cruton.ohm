@@ -15,7 +15,9 @@ CRUTON {
             | MAIN
             | Custom
 
-    GLOBALS = "." "data" ":" (~End GlobalDecl)* End
+    GLOBALS = "." "data" ":" (~End (GlobalDecl | Import))* End
+
+    Import = "@import" string "as" ident
 
     Custom = "." ident ":" (~End Statement)* End
 
@@ -25,7 +27,7 @@ CRUTON {
 
     GlobalDecl = ident ":" Expr ","?
 
-    Call = "call" ident
+    Call = "call" ident ","? ident?
 
     comment = ";" (~"\n" any)*
 
@@ -47,11 +49,14 @@ CRUTON {
 
     Expr = LogicalOr
 
-    LogicalOr = LogicalOr "or" LogicalOr --or
+    LogicalOr = Expr "or" Expr --or
               | LogicalAnd
     
-    LogicalAnd = LogicalAnd "and" LogicalAnd --and
-               | Primary
+    LogicalAnd = Expr "and" Expr --and
+               | Additive
+
+    Additive = Expr "+" Expr
+             | Primary
 
     Primary = "(" Expr ")" --parens
          | "not" Expr --not

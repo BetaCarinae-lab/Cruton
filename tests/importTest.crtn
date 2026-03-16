@@ -1,0 +1,7 @@
+.data:
+    @import "prompt-sync" as ps
+end
+
+.entry:
+    out ps
+end

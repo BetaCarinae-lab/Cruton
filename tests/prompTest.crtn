@@ -1,0 +1,8 @@
+.data:
+    @import "./std/prompt.js" as prompt
+end
+
+.entry:
+    mov r1, "Enter Name!"
+    call prompt, r2
+end
