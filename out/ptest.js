@@ -1,6 +1,6 @@
 
 // DATA SECTION
-var prompt = require("./std/prompt.js")
+var prompt = require("../std/prompt.js")
 // DATA SECTION END
         
     var r1 = null;

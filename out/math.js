@@ -12,23 +12,23 @@
 function main() {
     let a = 10;   
 let b = 10;   
-a = a + b   
+a += b   
 console.log(a);   
 //  should be 20   
 //  reset   
 a = 10;   
 b = 10;   
-a = a - b   
+a -= b   
 console.log(a);   
 //  should be 0   
 a = 10;   
 b = 10;   
-a = a * b   
+a *= b   
 console.log(a);   
 //  should be 100   
 a = 10;   
 b = 10;   
-a = a / b   
+a /= b   
 console.log(a);   
 //  should be 1   
 console.log(a + b);   

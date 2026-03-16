@@ -129,16 +129,16 @@ if(${condition.eval()}) {
         return '// ' + text.sourceString;
     },
     Add(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} + ${expr.eval()}`;
+        return `${id.eval()} += ${expr.eval()}`;
     },
     Sub(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} - ${expr.eval()}`;
+        return `${id.eval()} -= ${expr.eval()}`;
     },
     Mul(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} * ${expr.eval()}`;
+        return `${id.eval()} *= ${expr.eval()}`;
     },
     Div(_add, id, _, expr) {
-        return `${id.eval()} = ${id.eval()} / ${expr.eval()}`;
+        return `${id.eval()} /= ${expr.eval()}`;
     },
     string(_oq, text, _cq) {
         return "\"" + text.sourceString + "\"";
