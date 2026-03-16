@@ -97,6 +97,10 @@ if(${condition.eval()}) {
         }
     },
 
+    Additive_plus() {
+
+    },
+
     Ini(_ini, id, _, expr) {
         if(expr.sourceString) {
             return `let ${id.eval()} = ${expr.eval()};`
