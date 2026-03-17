@@ -73,7 +73,7 @@ CRUTON {
          | false
          | ident
 
-    
+    // what should I do for april fools day
 
     string = "\"" (~"\"" any)* "\""
 
