@@ -1,5 +1,7 @@
 import { ActionDict } from "ohm-js";
 
+const inlines = new Map<string, string>()
+
 export const dict: ActionDict<any> = {
     // MAIN
     //#region 
@@ -81,17 +83,27 @@ function main() {
     Call(_call, id, _c, outputTo) {
         if(outputTo.sourceString) {
             return `${outputTo.sourceString} = ${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`
+        } else if(inlines.has(id.sourceString)) { 
+            console.log('INLINE')
+            return inlines.get(id.sourceString)
         } else {
             return `${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`
         }
     },
 
-    Custom(_, id, _c, body, _end) {
-        return `
-function ${id.eval()}() {
-    ${body.children.map(c => c.eval()).join('\t\n')}
-}
-        `
+    Custom(inline, _, id, _c, body, _end) {
+        if(inline.sourceString ? true : false) {
+            inlines.set(id.sourceString, `
+                ${body.children.map(c => c.eval()).join('\t\n')}
+            `)
+            return `// inline func was here: ${id.sourceString}`
+        } else {
+            return `
+            function ${id.eval()}() {
+                ${body.children.map(c => c.eval()).join('\t\n')}
+            }
+                    `
+        }
     }, 
     //#endregion
 
