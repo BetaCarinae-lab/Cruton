@@ -1,11 +1,14 @@
 {
   "name": "cruton",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "./js/main.js",
   "scripts": {
     "test": "tsc"
   },
   "keywords": [],
+  "bin": {
+    "cruton": "./js/main.js"
+  },
   "author": "",
   "license": "ISC",
   "description": "",

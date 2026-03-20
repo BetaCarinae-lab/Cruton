@@ -41,6 +41,22 @@ function main() {
     },
     //#endregion
 
+    // OBJECTS
+    //#region 
+    ObjectIdent(_o, id, ids, _, _c) {
+        return `${id.sourceString}${ids.sourceString}`
+    },
+
+    Object(_ob, properties, _cb) {
+        return `{${properties.children.map(c => c.eval()).join('\n')}}`
+    },
+
+    Property(id, _, expr, _colon) {
+        return `${id.eval()}: ${expr.eval()},`
+    },
+
+    //#endregion
+
     // TOP LEVEL SEMANTICS
     //#region 
     nonemptyListOf(_, b, _c) {

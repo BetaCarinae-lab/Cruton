@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dict = void 0;
 exports.dict = {
+    // MAIN
+    //#region 
     Program(sections) {
         let code = '';
         sections.children.map(c => { code += c.eval(); });
@@ -26,11 +28,52 @@ function main() {
 }
         `;
     },
+    //#endregion
+    // ARRAYS
+    //#region 
     Array(_ob, elements, _cb) {
         return `[${elements.children.map(c => c.eval())}]`;
     },
+    ArrayAccess(id, _ob, expr, _cb) {
+        return `${id.eval()}[${expr.eval()}]`;
+    },
+    //#endregion
+    // OBJECTS
+    //#region 
+    ObjectIdent(_o, id, ids, _, _c) {
+        return `${id.sourceString}${ids.sourceString}`;
+    },
+    Object(_ob, properties, _cb) {
+        return `{${properties.children.map(c => c.eval()).join('\n')}}`;
+    },
+    Property(id, _, expr, _colon) {
+        return `${id.eval()}: ${expr.eval()},`;
+    },
+    //#endregion
+    // TOP LEVEL SEMANTICS
+    //#region 
     nonemptyListOf(_, b, _c) {
         return _.sourceString + b.sourceString;
+    },
+    Expr(or) {
+        return or.eval();
+    },
+    ident(first, rest) {
+        return first.sourceString + rest.sourceString;
+    },
+    comment(_, text) {
+        return '// ' + text.sourceString;
+    },
+    //#endregion
+    // FUNCTIONS
+    //#region 
+    Call(_call, id, _c, outputTo) {
+        if (outputTo.sourceString) {
+            return `${outputTo.sourceString} = ${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`;
+        }
+        else {
+            return `${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`;
+        }
     },
     Custom(_, id, _c, body, _end) {
         return `
@@ -39,12 +82,9 @@ function ${id.eval()}() {
 }
         `;
     },
-    ArrayAccess(id, _ob, expr, _cb) {
-        return `${id.eval()}[${expr.eval()}]`;
-    },
-    Import(_import, modulename, _as, id) {
-        return `var ${id.eval()} = require(${modulename.eval()})`;
-    },
+    //#endregion
+    // VARIABLES
+    //#region 
     GLOBALS(_d, _data, _, body, _end) {
         return `
 // DATA SECTION
@@ -54,48 +94,6 @@ ${body.children.map(c => c.eval()).join('\t\n')}
     },
     GlobalDecl(id, _, expr, _c) {
         return `var ${id.eval()} = ${expr.eval()}`;
-    },
-    Expr(or) {
-        return or.eval();
-    },
-    LogicalOr_or(left, _or, right) {
-        return `${left.eval()} || ${right.eval()}`;
-    },
-    LogicalAnd_and(left, _and, right) {
-        return `${left.eval()} && ${right.eval()}`;
-    },
-    Primary_parens(_op, expr, _cp) {
-        return `(${expr.eval()})`;
-    },
-    Primary_not(_, expr) {
-        return `!${expr.eval()}`;
-    },
-    If(_if, condition, _, body, _stop) {
-        return `
-if(${condition.eval()}) {
-    ${body.children.map(c => c.eval()).join('\n')}
-}
-        `;
-    },
-    true(_) {
-        return `true`;
-    },
-    false(_) {
-        return `false`;
-    },
-    Call(_call, id, _c, outputTo) {
-        if (outputTo.sourceString) {
-            return `${outputTo.sourceString} = ${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`;
-        }
-        else {
-            return `${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`;
-        }
-    },
-    Additive_plus(left, _, right) {
-        return `${left.eval()} + ${right.eval()}`;
-    },
-    Additive_minus(left, _, right) {
-        return `${left.eval()} - ${right.eval()}`;
     },
     Ini(_ini, id, _, expr) {
         if (expr.sourceString) {
@@ -111,6 +109,31 @@ if(${condition.eval()}) {
     Mov(_mov, id, _, expr) {
         return `${id.eval()} = ${expr.eval()};`;
     },
+    //#endregion
+    // BOOLEAN LOGIC
+    //#region 
+    If(_if, condition, _, body, _stop) {
+        return `
+if(${condition.eval()}) {
+    ${body.children.map(c => c.eval()).join('\n')}
+}
+        `;
+    },
+    Primary_not(_, expr) {
+        return `!${expr.eval()}`;
+    },
+    LogicalOr_or(left, _or, right) {
+        return `${left.eval()} || ${right.eval()}`;
+    },
+    LogicalAnd_and(left, _and, right) {
+        return `${left.eval()} && ${right.eval()}`;
+    },
+    true(_) {
+        return `true`;
+    },
+    false(_) {
+        return `false`;
+    },
     Comparisons_equality(left, _, right) {
         return `${left.eval()} == ${right.eval()}`;
     },
@@ -120,12 +143,18 @@ if(${condition.eval()}) {
     Comparisons_less(left, _, right) {
         return `${left.eval()} < ${right.eval()}`;
     },
+    //#endregion
+    // INBUILTS
+    //#region 
+    Import(_import, modulename, _as, id) {
+        return `var ${id.eval()} = require(${modulename.eval()})`;
+    },
     Out(_out, expr) {
         return `console.log(${expr.eval()});`;
     },
-    ident(first, rest) {
-        return first.sourceString + rest.sourceString;
-    },
+    //#endregion
+    // LOOPS
+    //#region 
     While(_loop, _, body, _if, cond) {
         return `
         while(${cond.eval()}) {
@@ -133,8 +162,17 @@ if(${condition.eval()}) {
         }
         `;
     },
-    comment(_, text) {
-        return '// ' + text.sourceString;
+    //#endregion
+    // MATH
+    //#region 
+    Primary_parens(_op, expr, _cp) {
+        return `(${expr.eval()})`;
+    },
+    Additive_plus(left, _, right) {
+        return `${left.eval()} + ${right.eval()}`;
+    },
+    Additive_minus(left, _, right) {
+        return `${left.eval()} - ${right.eval()}`;
     },
     Add(_add, id, _, expr) {
         return `${id.eval()} += ${expr.eval()}`;
@@ -154,4 +192,5 @@ if(${condition.eval()}) {
     number(digits) {
         return digits.sourceString;
     }
+    //#endregion 
 };

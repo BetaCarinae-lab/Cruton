@@ -17,6 +17,10 @@ CRUTON {
             | MAIN
             | Custom
 
+    Object = "{" Property+ "}"
+
+    Property = ident ":" Expr ","?
+
     GLOBALS = "." "data" ":" (~End (GlobalDecl | Import))* End
 
     Import = "@import" string "as" ident
@@ -35,13 +39,13 @@ CRUTON {
 
     If = "if" Expr ":" (~Stop Statement)* Stop
 
-    Add = "add" ident "," Expr
+    Add = "add" (ObjectIdent | ident) "," Expr
 
-    Sub = "sub" ident "," Expr
+    Sub = "sub" (ObjectIdent | ident) "," Expr
 
-    Mul = "mul" ident "," Expr
+    Mul = "mul" (ObjectIdent | ident) "," Expr
 
-    Div = "div" ident "," Expr
+    Div = "div" (ObjectIdent | ident) "," Expr
 
     Comparisons = Expr "=" Expr --equality
                 | Expr ">" Expr --greater
@@ -68,10 +72,15 @@ CRUTON {
          | string
          | ArrayAccess
          | number
+         | Object
+         | Comparisons
          | true
          | Array
          | false
          | ident
+         | ObjectIdent
+
+    ObjectIdent = "<" ident ("." ident)+ ~keyword ">"
 
     // what should I do for april fools day
 
@@ -79,7 +88,7 @@ CRUTON {
 
     Array = "[" listOf<Expr, ","> "]"
 
-    ArrayAccess = ident "[" Expr "]"
+    ArrayAccess = (ObjectIdent | ident) "[" Expr "]"
 
     End = "end"
 
@@ -93,9 +102,11 @@ CRUTON {
 
     Static = "static" ident "," Expr
 
-    Mov = "mov" ident "," Expr
+    Mov = "mov" (ObjectIdent | ident) "," Expr
 
-    ident = letter idchar*
+    ident = ~keyword letter idchar*
+    
+    keyword = "entry" | "loop" | "end" | "stop" | "static" | "mov" | "add" | "mul" | "sub" | "div" | "ini" | "out" | "call"
 
     idchar = letter | "_" | digit
 }

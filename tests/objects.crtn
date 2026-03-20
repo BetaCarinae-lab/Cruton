@@ -1,0 +1,7 @@
+.entry:
+    ini object, {
+        property: "Hai!"
+    }
+
+    out <object.property>
+end
