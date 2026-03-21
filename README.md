@@ -19,4 +19,6 @@ end
 and 'compile' using node ./js/main.js ./[nameofyourfile].crtn -o [nameofyourfile].js
 
 
-*(annoying, but simple)
+*(annoying, but simple)  
+
+DOCS ARE IN THE /docs folder  
