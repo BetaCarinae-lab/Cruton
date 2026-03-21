@@ -96,6 +96,13 @@ ${body.children.map(c => c.eval()).join('\t\n')}
                     `;
         }
     },
+    Method(id, _does, _, body, _end) {
+        return `
+${id.eval()}: function() {
+        ${body.children.map(c => c.eval()).join('\t\n')}
+}
+        `;
+    },
     //#endregion
     // VARIABLES
     //#region 

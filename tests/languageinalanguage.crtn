@@ -1,0 +1,7 @@
+.data:
+    @import "ohm-js" as ohm
+end
+
+.entry:
+    out "TEST"
+end

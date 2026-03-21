@@ -17,7 +17,12 @@ CRUTON {
             | MAIN
             | Custom
 
-    Object = "{" Property+ "}"
+    Object = "{" ValidProperty+ "}"
+
+    ValidProperty = Property
+                  | Method
+
+    Method = ident "does" ":" (~End Statement)* End
 
     Property = ident ":" Expr ","?
 
@@ -33,7 +38,7 @@ CRUTON {
 
     GlobalDecl = ident ":" Expr ","?
 
-    Call = "call" ident ","? ident?
+    Call = "call" (ident | ObjectIdent) ","? ident?
 
     comment = ";" (~"\n" any)*
 

@@ -4,4 +4,16 @@
     }
 
     out <object.property>
+
+    ini methods, {
+        property: "Property!"
+        changeProperty does:
+            out "Changing self.property to 20"
+            mov <this.property>, 20
+        end
+    }
+
+    call <methods.changeProperty>
+
+    out <methods.property>
 end
