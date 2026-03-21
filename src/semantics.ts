@@ -15,16 +15,18 @@ export const dict: ActionDict<any> = {
     //   hehe
     MAIN(_d, _entry, _, body, _end) {
         return `
-    var r1 = null;
-    var r2 = null;
-    var r3 = null;
-    var r4 = null;
-    var r5 = null;
-    var r6 = null;
-    var r7 = null;
-    var r8 = null;
-    var r9 = null;
-    var r10 = null;
+//#region
+var r1 = null;
+var r2 = null;
+var r3 = null;
+var r4 = null;
+var r5 = null;
+var r6 = null;
+var r7 = null;
+var r8 = null;
+var r9 = null;
+var r10 = null;
+//#endregion
 function main() {
     ${body.children.map(c => c.eval()).join('   \n')}
 }
@@ -84,7 +86,6 @@ function main() {
         if(outputTo.sourceString) {
             return `${outputTo.sourceString} = ${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`
         } else if(inlines.has(id.sourceString)) { 
-            console.log('INLINE')
             return inlines.get(id.sourceString)
         } else {
             return `${id.eval()}(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)`
@@ -92,9 +93,9 @@ function main() {
     },
 
     Custom(inline, _, id, _c, body, _end) {
-        if(inline.sourceString ? true : false) {
+        if(inline.sourceString) {
             inlines.set(id.sourceString, `
-                ${body.children.map(c => c.eval()).join('\t\n')}
+${body.children.map(c => c.eval()).join('\t\n')}
             `)
             return `// inline func was here: ${id.sourceString}`
         } else {

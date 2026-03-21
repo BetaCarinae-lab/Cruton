@@ -1,8 +1,8 @@
-.entry:
-    mov r1, 10
-    call printR1
+inline .print:
+    out r1
 end
 
-inline .printR1:
-    out r1
+.entry:
+    mov r1, 10
+    call print
 end

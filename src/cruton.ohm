@@ -106,7 +106,7 @@ CRUTON {
 
     ident = ~keyword letter idchar*
     
-    keyword = "entry" | "loop" | "end" | "stop" | "static" | "mov" | "add" | "mul" | "sub" | "div" | "ini" | "out" | "call"
+    keyword = "entry" | "loop" | "end" | "stop" | "static" | "mov" | "add" | "mul" | "sub" | "div" | "ini" | "out" | "call" | "if" | "true" | "false" | "or" | "and" | "not"
 
     idchar = letter | "_" | digit
 }
