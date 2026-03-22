@@ -4,4 +4,6 @@ end
 
 .entry:
     out ps
+    ini value, 10
+    @export "value" as example
 end

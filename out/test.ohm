@@ -1,0 +1,5 @@
+TEST {
+    Program = out
+
+    out = "printHello"
+}

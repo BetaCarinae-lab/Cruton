@@ -170,6 +170,9 @@ if(${condition.eval()}) {
     Import(_import, modulename, _as, id) {
         return `var ${id.eval()} = require(${modulename.eval()})`;
     },
+    Export(_export, name, _as, id) {
+        return `module.exports["${id.eval()}"] = ${name.eval()}`;
+    },
     Out(_out, expr) {
         return `console.log(${expr.eval()});`;
     },

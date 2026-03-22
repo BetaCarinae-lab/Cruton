@@ -7,6 +7,7 @@ CRUTON {
               | Static
               | While
               | Mov
+              | Export
               | If
               | Add
               | Sub
@@ -29,6 +30,8 @@ CRUTON {
     GLOBALS = "." "data" ":" (~End (GlobalDecl | Import))* End
 
     Import = "@import" string "as" ident
+
+    Export = "@export" string "as" ident
 
     Custom = "inline"? "." ident ":" (~End Statement)* End
 

@@ -3,18 +3,22 @@
 var ps = require("prompt-sync")
 // DATA SECTION END
         
-    var r1 = null;
-    var r2 = null;
-    var r3 = null;
-    var r4 = null;
-    var r5 = null;
-    var r6 = null;
-    var r7 = null;
-    var r8 = null;
-    var r9 = null;
-    var r10 = null;
+//#region
+var r1 = null;
+var r2 = null;
+var r3 = null;
+var r4 = null;
+var r5 = null;
+var r6 = null;
+var r7 = null;
+var r8 = null;
+var r9 = null;
+var r10 = null;
+//#endregion
 function main() {
-    console.log(ps);
+    console.log(ps);   
+let value = 10;   
+module.exports["example"] = "value"
 }
         
  main() 
