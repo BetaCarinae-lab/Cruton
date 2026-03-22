@@ -119,3 +119,8 @@ Globals work like:
     ; global declarations go here
 end
 ```
+
+
+
+### CONGRATULATIONS
+You know the basics of Cruton!
