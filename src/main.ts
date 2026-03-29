@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as ohm from 'ohm-js'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { argv } from 'node:process'
@@ -19,6 +21,17 @@ if(argv[2] == 'new') {
 
     writeFileSync('config.json', JSON.stringify(structure, null, 2), 'utf-8')
 
+    exit(0)
+} else if(argv[2] == '-h') {
+    console.log('--Help Menu--')
+    console.log('Running Files: ')
+    console.log('   To run files use ./run.sh [filepath] -o? (outputFileName| "default")? -s?')
+    console.log('   (? denotes optional)')
+    console.log('   -o indicates the outputFileName, if it excluded while given a outputfileName errors will be triggered')
+    console.log('   -s denotes compile preference, if omitted, the (hopefully) valid code will be produced, if -s, then')
+    console.log('   the newly created file will be executed via node\n')
+    console.log('Other Commands: ')
+    console.log('   ./run.sh -h -> это мену')
     exit(0)
 }
 
@@ -49,6 +62,8 @@ if(matchresult.failed()) {
 
                 if(stderr) {
                     // do nothing ig
+                    // actually, do something here
+                    console.log('ERR: ' + stderr)
                 }
             })
         } else {

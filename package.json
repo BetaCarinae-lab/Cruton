@@ -1,5 +1,5 @@
 {
-  "name": "cruton",
+  "name": "cruton-lang",
   "version": "1.0.0",
   "main": "./js/main.js",
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "keywords": [],
   "bin": {
-    "cruton": "./js/main.js"
+    "crtn": "./js/main.js"
   },
   "author": "",
   "license": "ISC",

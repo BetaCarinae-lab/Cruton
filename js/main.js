@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -43,6 +44,18 @@ if (node_process_1.argv[2] == 'new') {
     (0, node_fs_1.writeFileSync)('config.json', JSON.stringify(structure, null, 2), 'utf-8');
     (0, node_process_2.exit)(0);
 }
+else if (node_process_1.argv[2] == '-h') {
+    console.log('--Help Menu--');
+    console.log('Running Files: ');
+    console.log('   To run files use ./run.sh [filepath] -o? (outputFileName| "default")? -s?');
+    console.log('   (? denotes optional)');
+    console.log('   -o indicates the outputFileName, if it excluded while given a outputfileName errors will be triggered');
+    console.log('   -s denotes compile preference, if omitted, the (hopefully) valid code will be produced, if -s, then');
+    console.log('   the newly created file will be executed via node\n');
+    console.log('Other Commands: ');
+    console.log('   ./run.sh -h -> это мену');
+    (0, node_process_2.exit)(0);
+}
 const input = (0, node_fs_1.readFileSync)(node_process_1.argv[2], 'utf-8');
 const matchresult = exports.grammar.match(input);
 const semantics = exports.grammar.createSemantics().addOperation('eval', semantics_1.dict);
@@ -66,6 +79,8 @@ else {
                 }
                 if (stderr) {
                     // do nothing ig
+                    // actually, do something here
+                    console.log('ERR: ' + stderr);
                 }
             });
         }
