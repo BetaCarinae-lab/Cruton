@@ -246,6 +246,14 @@ if(${condition.eval()}) {
         return `${id.eval()} /= ${expr.eval()}`
     },
 
+    Inc(_inc, id) {
+        return `${id.eval()}++`
+    },
+
+    Dec(_dec, id) {
+        return `${id.eval()}--`
+    },
+
     string(_oq, text, _cq) {
         return "\"" + text.sourceString + "\""
     },

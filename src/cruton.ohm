@@ -9,6 +9,8 @@ CRUTON {
               | Mov
               | Export
               | If
+              | Inc
+              | Dec
               | Add
               | Sub
               | Mul
@@ -54,6 +56,10 @@ CRUTON {
     Mul = "mul" (ObjectIdent | ident) "," Expr
 
     Div = "div" (ObjectIdent | ident) "," Expr
+
+    Inc = "inc" (ObjectIdent | ident)
+
+    Dec = "dec" (ObjectIdent | ident)
 
     Comparisons = Expr "=" Expr --equality
                 | Expr ">" Expr --greater

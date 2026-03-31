@@ -110,6 +110,19 @@ you can write
 end
 ```
 
+There is also inc, and dec which only work using ObjectIdent or a Id, Eg:
+```
+.entry:
+    ini a, 0
+    inc a
+    out a ; will be 1
+
+    ini b, 0
+    dec b
+    out b ; will be -1
+end
+```
+
 ### GLOBALS
 *No fancy name, i had no idea what to do for this one*
 
